@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,6 +10,7 @@ import MainLayout from "./components/Layout/MainLayout";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import DanaPage from "./pages/Dana";
+import Families from "./pages/Families";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,7 +48,7 @@ const App = () => (
             <Route path="/families" element={
               <ProtectedRoute>
                 <MainLayout>
-                  <div className="text-center text-gray-500">Families page coming soon...</div>
+                  <Families />
                 </MainLayout>
               </ProtectedRoute>
             } />
