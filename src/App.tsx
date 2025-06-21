@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,6 +8,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import MainLayout from "./components/Layout/MainLayout";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
+import DanaPage from "./pages/Dana";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -53,7 +53,7 @@ const App = () => (
             <Route path="/dana" element={
               <ProtectedRoute>
                 <MainLayout>
-                  <div className="text-center text-gray-500">Dana page coming soon...</div>
+                  <DanaPage />
                 </MainLayout>
               </ProtectedRoute>
             } />
