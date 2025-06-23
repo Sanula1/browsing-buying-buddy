@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, MapPin, Clock, CheckCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Calendar, MapPin, Clock, CheckCircle, Check } from "lucide-react";
 
 interface Assignment {
   id: number;
@@ -15,7 +16,7 @@ interface Assignment {
 }
 
 export const MemberAssignments = () => {
-  const [assignments] = useState<Assignment[]>([
+  const [assignments, setAssignments] = useState<Assignment[]>([
     {
       id: 1,
       templeName: "Sacred Heart Temple",
@@ -64,6 +65,21 @@ export const MemberAssignments = () => {
     }
   };
 
+  const isTomorrow = (dateString: string) => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const assignmentDate = new Date(dateString);
+    return assignmentDate.toDateString() === tomorrow.toDateString();
+  };
+
+  const handleConfirmAssignment = (id: number) => {
+    setAssignments(prev => prev.map(assignment => 
+      assignment.id === id 
+        ? { ...assignment, status: "confirmed" as const }
+        : assignment
+    ));
+  };
+
   return (
     <div className="space-y-6">
       <div>
@@ -106,6 +122,18 @@ export const MemberAssignments = () => {
                   {assignment.location}
                 </div>
               </div>
+              {isTomorrow(assignment.date) && assignment.status === "upcoming" && (
+                <div className="pt-2">
+                  <Button 
+                    onClick={() => handleConfirmAssignment(assignment.id)}
+                    className="bg-green-600 hover:bg-green-700"
+                    size="sm"
+                  >
+                    <Check className="h-4 w-4 mr-2" />
+                    Confirm Tomorrow's Dana
+                  </Button>
+                </div>
+              )}
             </CardContent>
           </Card>
         ))}

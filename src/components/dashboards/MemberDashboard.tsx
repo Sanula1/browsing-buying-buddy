@@ -3,6 +3,7 @@ import { useState } from "react";
 import { MemberSidebar } from "@/components/sidebars/MemberSidebar";
 import { Dashboard } from "@/components/Dashboard";
 import { MemberAssignments } from "@/components/MemberAssignments";
+import { PrintSection } from "@/components/PrintSection";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
@@ -16,6 +17,8 @@ export const MemberDashboard = () => {
         return <Dashboard />;
       case "assignments":
         return <MemberAssignments />;
+      case "print":
+        return <PrintSection />;
       default:
         return <Dashboard />;
     }
