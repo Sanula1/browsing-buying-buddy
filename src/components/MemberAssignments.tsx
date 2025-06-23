@@ -78,6 +78,7 @@ export const MemberAssignments = () => {
         ? { ...assignment, status: "confirmed" as const }
         : assignment
     ));
+    console.log(`Assignment ${id} confirmed for tomorrow's dana`);
   };
 
   return (
