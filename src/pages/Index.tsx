@@ -1,20 +1,19 @@
 
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Login from "./Login";
 
-const Index: React.FC = () => {
-  const { isAuthenticated, loading } = useAuth();
+const Index = () => {
+  const navigate = useNavigate();
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-orange-600"></div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
-  return isAuthenticated ? <Navigate to="/" /> : <Navigate to="/login" />;
+  return <Login />;
 };
 
 export default Index;
