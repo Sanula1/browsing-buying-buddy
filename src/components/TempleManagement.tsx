@@ -1,10 +1,11 @@
 
 import { useState } from "react";
-import { Plus, Search, Edit, Trash } from "lucide-react";
+import { Plus, Search, Edit, Trash, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { AssignVillageDialog } from "@/components/dialogs/AssignVillageDialog";
 
 interface Temple {
   id: number;
@@ -37,11 +38,18 @@ export const TempleManagement = () => {
   
   const [searchTerm, setSearchTerm] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [showAssignVillage, setShowAssignVillage] = useState(false);
+  const [selectedTemple, setSelectedTemple] = useState<Temple | null>(null);
 
   const filteredTemples = temples.filter(temple =>
     temple.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     temple.address.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleAssignVillage = (temple: Temple) => {
+    setSelectedTemple(temple);
+    setShowAssignVillage(true);
+  };
 
   return (
     <div className="space-y-6">
@@ -100,14 +108,24 @@ export const TempleManagement = () => {
                     <p className="text-xs sm:text-sm text-gray-500">Website</p>
                     <p className="text-xs sm:text-sm font-medium text-blue-600">{temple.website}</p>
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-2 pt-2">
-                    <Button size="sm" variant="outline" className="flex-1 text-xs sm:text-sm px-3 py-2 h-8 sm:h-9">
-                      <Edit className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
-                      Edit
+                  <div className="flex flex-col gap-2 pt-2">
+                    <Button 
+                      size="sm" 
+                      onClick={() => handleAssignVillage(temple)}
+                      className="w-full bg-green-600 hover:bg-green-700 text-xs sm:text-sm px-3 py-2 h-8 sm:h-9"
+                    >
+                      <MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                      Assign Village
                     </Button>
-                    <Button size="sm" variant="outline" className="flex-1 text-red-600 hover:text-red-700 text-xs sm:text-sm px-3 py-2 h-8 sm:h-9">
-                      <Trash className="h-3 w-3 sm:h-4 sm:w-4" />
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button size="sm" variant="outline" className="flex-1 text-xs sm:text-sm px-3 py-2 h-8 sm:h-9">
+                        <Edit className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                        Edit
+                      </Button>
+                      <Button size="sm" variant="outline" className="flex-1 text-red-600 hover:text-red-700 text-xs sm:text-sm px-3 py-2 h-8 sm:h-9">
+                        <Trash className="h-3 w-3 sm:h-4 sm:w-4" />
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -115,6 +133,12 @@ export const TempleManagement = () => {
           </div>
         </CardContent>
       </Card>
+
+      <AssignVillageDialog 
+        open={showAssignVillage}
+        onOpenChange={setShowAssignVillage}
+        temple={selectedTemple}
+      />
     </div>
   );
 };

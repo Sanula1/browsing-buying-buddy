@@ -1,10 +1,11 @@
 
 import { useState } from "react";
-import { Plus, Search, Calendar, CheckCircle, Clock, Users, Trash2 } from "lucide-react";
+import { Plus, Search, Calendar, CheckCircle, Clock, Users, Trash2, Building, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,49 +20,176 @@ import {
 
 interface Assignment {
   id: number;
-  family: string;
-  temple: string;
-  dana: string;
+  templeDana: {
+    templeId: {
+      id: number;
+      name: string;
+      address: string;
+      contactNumber: string;
+      email: string;
+      website: string;
+    };
+    dana: {
+      id: number;
+      name: string;
+      description: string;
+      time: string;
+    };
+    minNumberOfFamilies: number;
+    assignments: Array<{
+      id: number;
+      family: {
+        id: number;
+        familyName: string;
+        address: string;
+        telephone: string;
+      };
+      date: string;
+      isConfirmed: boolean | null;
+      confirmationDate: string;
+    }>;
+  };
+  family: {
+    id: number;
+    familyName: string;
+    address: string;
+    telephone: string;
+  };
   date: string;
-  isConfirmed: boolean;
-  confirmationDate?: string;
+  isConfirmed: boolean | null;
+  confirmationDate: string;
 }
 
 export const AssignmentManagement = () => {
   const [assignments, setAssignments] = useState<Assignment[]>([
     {
       id: 1,
-      family: "Silva Family",
-      temple: "Sri Maha Bodhi Temple",
-      dana: "Morning Dana",
-      date: "2024-12-24",
-      isConfirmed: true,
-      confirmationDate: "2024-12-20"
+      templeDana: {
+        templeId: {
+          id: 1,
+          name: "Sri Vajiraramaya",
+          address: "Maligawatta Temple Road",
+          contactNumber: "0112695161",
+          email: "vajiraramaya@temple.lk",
+          website: "www.vajiraramaya.lk"
+        },
+        dana: {
+          id: 1,
+          name: "Morning Heel Dana",
+          description: "Early morning rice offering",
+          time: "MORNING"
+        },
+        minNumberOfFamilies: 5,
+        assignments: [
+          {
+            id: 1,
+            family: {
+              id: 1,
+              familyName: "Perera Family",
+              address: "No 123, Temple Road, Maligawatta",
+              telephone: "0112695161"
+            },
+            date: "2025-06-20",
+            isConfirmed: null,
+            confirmationDate: "2025-06-20"
+          }
+        ]
+      },
+      family: {
+        id: 1,
+        familyName: "Perera Family",
+        address: "No 123, Temple Road, Maligawatta",
+        telephone: "0112695161"
+      },
+      date: "2025-06-20",
+      isConfirmed: null,
+      confirmationDate: "2025-06-20"
     },
     {
       id: 2,
-      family: "Perera Family",
-      temple: "Temple of Peace",
-      dana: "Evening Dana",
-      date: "2024-12-25",
-      isConfirmed: false
+      templeDana: {
+        templeId: {
+          id: 2,
+          name: "Gangaramaya",
+          address: "Dematagoda Temple Road",
+          contactNumber: "0112435127",
+          email: "gangaramaya@temple.lk",
+          website: "www.gangaramaya.lk"
+        },
+        dana: {
+          id: 2,
+          name: "Buddha Pooja",
+          description: "Midday alms offering",
+          time: "AFTERNOON"
+        },
+        minNumberOfFamilies: 4,
+        assignments: [
+          {
+            id: 2,
+            family: {
+              id: 2,
+              familyName: "Silva Family",
+              address: "No 456, Lake Road, Dematagoda",
+              telephone: "0112435127"
+            },
+            date: "2025-06-21",
+            isConfirmed: null,
+            confirmationDate: "2025-06-21"
+          }
+        ]
+      },
+      family: {
+        id: 2,
+        familyName: "Silva Family",
+        address: "No 456, Lake Road, Dematagoda",
+        telephone: "0112435127"
+      },
+      date: "2025-06-21",
+      isConfirmed: null,
+      confirmationDate: "2025-06-21"
     },
     {
       id: 3,
-      family: "Fernando Family",
-      temple: "Sri Maha Bodhi Temple",
-      dana: "Special Dana",
-      date: "2024-12-26",
-      isConfirmed: true,
-      confirmationDate: "2024-12-21"
-    },
-    {
-      id: 4,
-      family: "Wijesinghe Family",
-      temple: "Temple of Peace",
-      dana: "Afternoon Dana",
-      date: "2024-12-27",
-      isConfirmed: false
+      templeDana: {
+        templeId: {
+          id: 3,
+          name: "Dipaduttaramaya",
+          address: "Maradana Temple Road",
+          contactNumber: "0112691378",
+          email: "dipaduttaramaya@temple.lk",
+          website: "www.dipaduttaramaya.lk"
+        },
+        dana: {
+          id: 1,
+          name: "Morning Heel Dana",
+          description: "Early morning rice offering",
+          time: "MORNING"
+        },
+        minNumberOfFamilies: 3,
+        assignments: [
+          {
+            id: 3,
+            family: {
+              id: 3,
+              familyName: "Fernando Family",
+              address: "No 789, Station Road, Maradana",
+              telephone: "0112691378"
+            },
+            date: "2025-06-22",
+            isConfirmed: null,
+            confirmationDate: "2025-06-22"
+          }
+        ]
+      },
+      family: {
+        id: 3,
+        familyName: "Fernando Family",
+        address: "No 789, Station Road, Maradana",
+        telephone: "0112691378"
+      },
+      date: "2025-06-22",
+      isConfirmed: null,
+      confirmationDate: "2025-06-22"
     }
   ]);
   
@@ -69,9 +197,9 @@ export const AssignmentManagement = () => {
   const userRole = localStorage.getItem("userRole");
 
   const filteredAssignments = assignments.filter(assignment =>
-    assignment.family.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    assignment.temple.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    assignment.dana.toLowerCase().includes(searchTerm.toLowerCase())
+    assignment.family.familyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    assignment.templeDana.templeId.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    assignment.templeDana.dana.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleConfirmAssignment = (id: number) => {
@@ -87,6 +215,15 @@ export const AssignmentManagement = () => {
   };
 
   const canDelete = userRole === "admin" || userRole === "headmonk" || userRole === "helper";
+
+  const getTimeColor = (time: string) => {
+    switch (time) {
+      case "MORNING": return "bg-yellow-100 text-yellow-800";
+      case "AFTERNOON": return "bg-orange-100 text-orange-800";
+      case "EVENING": return "bg-purple-100 text-purple-800";
+      default: return "bg-gray-100 text-gray-800";
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -116,100 +253,108 @@ export const AssignmentManagement = () => {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
-            {filteredAssignments.map((assignment) => (
-              <Card key={assignment.id} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-4 sm:p-6">
-                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                    <div className="flex-1 space-y-3">
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                        <div className="flex items-center space-x-2">
-                          <Users className="h-4 w-4 text-purple-600" />
-                          <span className="font-semibold text-purple-800 text-sm sm:text-base">{assignment.family}</span>
-                        </div>
-                        <Badge 
-                          variant={assignment.isConfirmed ? "default" : "secondary"}
-                          className={`${assignment.isConfirmed ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800"} text-xs`}
-                        >
-                          {assignment.isConfirmed ? (
-                            <>
-                              <CheckCircle className="h-3 w-3 mr-1" />
-                              Confirmed
-                            </>
-                          ) : (
-                            <>
-                              <Clock className="h-3 w-3 mr-1" />
-                              Pending
-                            </>
-                          )}
-                        </Badge>
-                      </div>
-                      
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs sm:text-sm">
-                        <div>
-                          <p className="text-gray-500">Temple</p>
-                          <p className="font-medium">{assignment.temple}</p>
-                        </div>
-                        <div>
-                          <p className="text-gray-500">Dana Type</p>
-                          <p className="font-medium">{assignment.dana}</p>
-                        </div>
-                        <div>
-                          <p className="text-gray-500">Date</p>
-                          <p className="font-medium flex items-center">
-                            <Calendar className="h-3 w-3 mr-1" />
-                            {new Date(assignment.date).toLocaleDateString()}
-                          </p>
-                        </div>
-                        {assignment.confirmationDate && (
-                          <div>
-                            <p className="text-gray-500">Confirmed On</p>
-                            <p className="font-medium">{new Date(assignment.confirmationDate).toLocaleDateString()}</p>
-                          </div>
-                        )}
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>ID</TableHead>
+                <TableHead>Temple</TableHead>
+                <TableHead>Dana</TableHead>
+                <TableHead>Family</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredAssignments.map((assignment) => (
+                <TableRow key={assignment.id}>
+                  <TableCell className="font-medium">{assignment.id}</TableCell>
+                  <TableCell>
+                    <div className="flex items-center space-x-2">
+                      <Building className="h-4 w-4 text-orange-600" />
+                      <div>
+                        <div className="font-medium">{assignment.templeDana.templeId.name}</div>
+                        <div className="text-xs text-gray-500">{assignment.templeDana.templeId.address}</div>
                       </div>
                     </div>
-                    
-                    <div className="flex flex-row sm:flex-col lg:flex-row gap-2 w-full sm:w-auto">
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center space-x-2">
+                      <Heart className="h-4 w-4 text-red-600" />
+                      <div>
+                        <div className="font-medium">{assignment.templeDana.dana.name}</div>
+                        <Badge className={`${getTimeColor(assignment.templeDana.dana.time)} text-xs mt-1`}>
+                          {assignment.templeDana.dana.time}
+                        </Badge>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center space-x-2">
+                      <Users className="h-4 w-4 text-purple-600" />
+                      <div>
+                        <div className="font-medium">{assignment.family.familyName}</div>
+                        <div className="text-xs text-gray-500">{assignment.family.telephone}</div>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center space-x-2">
+                      <Calendar className="h-4 w-4 text-gray-400" />
+                      <span>{new Date(assignment.date).toLocaleDateString()}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <Badge 
+                      variant={assignment.isConfirmed ? "default" : "secondary"}
+                      className={`${assignment.isConfirmed ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800"}`}
+                    >
+                      {assignment.isConfirmed ? (
+                        <>
+                          <CheckCircle className="h-3 w-3 mr-1" />
+                          Confirmed
+                        </>
+                      ) : (
+                        <>
+                          <Clock className="h-3 w-3 mr-1" />
+                          Pending
+                        </>
+                      )}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex gap-2">
                       {!assignment.isConfirmed && (
                         <Button 
                           size="sm" 
                           onClick={() => handleConfirmAssignment(assignment.id)}
-                          className="flex-1 sm:flex-none bg-green-600 hover:bg-green-700 text-xs sm:text-sm px-3 py-2 h-8 sm:h-9"
+                          className="bg-green-600 hover:bg-green-700 text-xs"
                         >
                           Confirm
                         </Button>
                       )}
-                      <Button 
-                        size="sm" 
-                        variant="outline"
-                        className="flex-1 sm:flex-none text-xs sm:text-sm px-3 py-2 h-8 sm:h-9"
-                      >
+                      <Button size="sm" variant="outline" className="text-xs">
                         Edit
                       </Button>
                       {canDelete && (
                         <AlertDialog>
                           <AlertDialogTrigger asChild>
-                            <Button 
-                              size="sm" 
-                              variant="outline" 
-                              className="flex-1 sm:flex-none text-red-600 hover:text-red-700 hover:bg-red-50 text-xs sm:text-sm px-2 sm:px-3 py-2 h-8 sm:h-9"
-                            >
-                              <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                            <Button size="sm" variant="outline" className="text-red-600 hover:text-red-700 text-xs">
+                              <Trash2 className="h-3 w-3" />
                             </Button>
                           </AlertDialogTrigger>
-                          <AlertDialogContent className="w-[90vw] max-w-md mx-auto">
+                          <AlertDialogContent>
                             <AlertDialogHeader>
-                              <AlertDialogTitle className="text-base sm:text-lg">Delete Assignment</AlertDialogTitle>
-                              <AlertDialogDescription className="text-sm">
-                                Are you sure you want to delete this assignment for {assignment.family}? This action cannot be undone.
+                              <AlertDialogTitle>Delete Assignment</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                Are you sure you want to delete this assignment for {assignment.family.familyName}? This action cannot be undone.
                               </AlertDialogDescription>
                             </AlertDialogHeader>
-                            <AlertDialogFooter className="flex flex-col sm:flex-row gap-2">
-                              <AlertDialogCancel className="w-full sm:w-auto text-sm">Cancel</AlertDialogCancel>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
                               <AlertDialogAction 
                                 onClick={() => handleDeleteAssignment(assignment.id)}
-                                className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-sm"
+                                className="bg-red-600 hover:bg-red-700"
                               >
                                 Delete
                               </AlertDialogAction>
@@ -218,11 +363,11 @@ export const AssignmentManagement = () => {
                         </AlertDialog>
                       )}
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </CardContent>
       </Card>
     </div>
