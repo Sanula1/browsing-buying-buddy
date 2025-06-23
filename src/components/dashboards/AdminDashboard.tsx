@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Sidebar } from "@/components/Sidebar";
 import { Dashboard } from "@/components/Dashboard";
@@ -10,6 +9,7 @@ import { AssignmentManagement } from "@/components/AssignmentManagement";
 import { HeadMonkManagement } from "@/components/HeadMonkManagement";
 import { HelperManagement } from "@/components/HelperManagement";
 import { MemberManagement } from "@/components/MemberManagement";
+import { Profile } from "@/components/Profile";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
@@ -37,6 +37,8 @@ export const AdminDashboard = () => {
         return <HelperManagement />;
       case "members":
         return <MemberManagement />;
+      case "profile":
+        return <Profile />;
       default:
         return <Dashboard />;
     }

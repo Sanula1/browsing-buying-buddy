@@ -1,5 +1,4 @@
-
-import { Calendar, BarChart3, LogOut, Users } from "lucide-react";
+import { Calendar, BarChart3, LogOut, Users, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +14,7 @@ export const HelperSidebar = ({ activeTab, setActiveTab }: HelperSidebarProps) =
     { id: "dashboard", label: "Dashboard", icon: BarChart3 },
     { id: "assignments", label: "Dana Assignments", icon: Calendar },
     { id: "members", label: "Member Management", icon: Users },
+    { id: "profile", label: "Profile", icon: User },
   ];
 
   const handleLogout = () => {
@@ -30,7 +30,7 @@ export const HelperSidebar = ({ activeTab, setActiveTab }: HelperSidebarProps) =
       </div>
       
       <nav className="flex-1 flex flex-col justify-between">
-        <div className="mt-6">
+        <div className="mt-6 flex-1 overflow-y-auto">
           {menuItems.map((item) => {
             const Icon = item.icon;
             return (

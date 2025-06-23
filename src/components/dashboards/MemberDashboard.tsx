@@ -1,9 +1,9 @@
-
 import { useState } from "react";
 import { MemberSidebar } from "@/components/sidebars/MemberSidebar";
 import { Dashboard } from "@/components/Dashboard";
 import { MemberAssignments } from "@/components/MemberAssignments";
 import { PrintSection } from "@/components/PrintSection";
+import { Profile } from "@/components/Profile";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
@@ -19,6 +19,8 @@ export const MemberDashboard = () => {
         return <MemberAssignments />;
       case "print":
         return <PrintSection />;
+      case "profile":
+        return <Profile />;
       default:
         return <Dashboard />;
     }

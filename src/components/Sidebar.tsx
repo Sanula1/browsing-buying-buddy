@@ -1,5 +1,4 @@
-
-import { Building, Home, Users, Heart, Calendar, BarChart3, LogOut, User, Crown } from "lucide-react";
+import { Building, Home, Users, Heart, Calendar, BarChart3, LogOut, User, Crown, UserCog } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 
@@ -22,6 +21,7 @@ export const Sidebar = ({ activeTab, setActiveTab, userRole = "admin" }: Sidebar
     { id: "headmonks", label: "Head Monks", icon: Crown },
     { id: "helpers", label: "Helpers", icon: User },
     { id: "members", label: "Members", icon: Users },
+    { id: "profile", label: "Profile", icon: UserCog },
   ];
 
   const handleLogout = () => {

@@ -1,5 +1,4 @@
-
-import { Building, Heart, Calendar, BarChart3, LogOut, User, Users } from "lucide-react";
+import { Building, Heart, Calendar, BarChart3, LogOut, User, Users, UserCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 
@@ -18,6 +17,7 @@ export const HeadMonkSidebar = ({ activeTab, setActiveTab }: HeadMonkSidebarProp
     { id: "assignments", label: "Dana Assignments", icon: Calendar },
     { id: "helpers", label: "Helper Management", icon: User },
     { id: "members", label: "Member Management", icon: Users },
+    { id: "profile", label: "Profile", icon: UserCheck },
   ];
 
   const handleLogout = () => {

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { HeadMonkSidebar } from "@/components/sidebars/HeadMonkSidebar";
 import { Dashboard } from "@/components/Dashboard";
@@ -7,6 +6,7 @@ import { DanaManagement } from "@/components/DanaManagement";
 import { AssignmentManagement } from "@/components/AssignmentManagement";
 import { HelperManagement } from "@/components/HelperManagement";
 import { MemberManagement } from "@/components/MemberManagement";
+import { Profile } from "@/components/Profile";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
@@ -28,6 +28,8 @@ export const HeadMonkDashboard = () => {
         return <HelperManagement />;
       case "members":
         return <MemberManagement />;
+      case "profile":
+        return <Profile />;
       default:
         return <Dashboard />;
     }

@@ -1,9 +1,9 @@
-
 import { useState } from "react";
 import { HelperSidebar } from "@/components/sidebars/HelperSidebar";
 import { Dashboard } from "@/components/Dashboard";
 import { AssignmentManagement } from "@/components/AssignmentManagement";
 import { MemberManagement } from "@/components/MemberManagement";
+import { Profile } from "@/components/Profile";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
@@ -19,6 +19,8 @@ export const HelperDashboard = () => {
         return <AssignmentManagement />;
       case "members":
         return <MemberManagement />;
+      case "profile":
+        return <Profile />;
       default:
         return <Dashboard />;
     }
